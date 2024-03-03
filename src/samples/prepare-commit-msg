@@ -1,0 +1,13 @@
+#!/bin/sh
+
+# Скопировать данный файл в папку .git/hooks
+# В случае необходимости поменять путь к python (указать полный или прописать в env)
+
+BRANCH_NAME=$(git branch | grep '*' | sed 's/* //')
+
+if [ $BRANCH_NAME != '(no branch)' ]
+then
+  COMMIT_MSG_FILE=$1
+  python3 ./.git/hooks/prepare_commit_msg.py "$COMMIT_MSG_FILE"
+fi
+
